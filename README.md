@@ -14,7 +14,7 @@ You must be logged in to populate the form and click the "Scan Worn Items" follo
 
 Once you have clicked "Scan Containers", you will be able to toggle between Worn Items and Containers. Double-clicking on the various items will either launch elanthipedia and conduct a search for your item, or if you toggle "Show Containers Only", will open another window with the containers items. You can then hit the "enter" key to try and find the item on elanthipedia. 
 
-## Notes on Stand-Alone .EXE Usage:
+### Notes on Stand-Alone .EXE Usage:
 If you like, you can also use the Plugin as a stand-alone executable. Ensure you first populated the "Character_Inventory.xml" file from Genie when you were logged in. Then copy the .XML file to the same folder as the .EXE and you should have the same functionality. 
 
 ##Couple other things:
