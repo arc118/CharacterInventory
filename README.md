@@ -3,7 +3,7 @@ GeniePlugin to Scan your Worn items and Containers
 
 ## V1.0 - Initial Release
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.jpg)
 
 ### Instructions:
 This Plugin is for use with Genie and Dragonrealms MUD only. This version was tested with Genie V3.5.4724.145
