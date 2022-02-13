@@ -170,7 +170,8 @@ namespace Character_Inventory
             if (loggedIn_character != null)
                 comboBox_CharacterSelect.SelectedItem = loggedIn_character;
             else
-                comboBox_CharacterSelect.SelectedIndex = 0;
+                if (loggedIn_character != null)
+                        comboBox_CharacterSelect.SelectedIndex = 0;
 
 #else
             foreach (My_Character character in Plugin_Code._character_list_XML.My_Character)
