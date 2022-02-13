@@ -1,5 +1,5 @@
 # CharacterInventory
-GeniePlugin to Scan your Worn items and Containers in Dragonrealms.
+GeniePlugin to Scan your Worn items and Containers in Dragonrealms. 
 
 ### V1.1 - Initial Release 
 - Updated Directory pathing to work with Genie 4 (using appdata directory)
@@ -8,7 +8,7 @@ GeniePlugin to Scan your Worn items and Containers in Dragonrealms.
 ![Screenshot](/screenshot.jpg)
 
 ### Instructions:
-This Plugin is for use with Genie and Dragonrealms MUD only. This version was tested with Genie V3.5.4724.145
+This Plugin is for use with Genie and Dragonrealms MUD only. Tested with Genie V3.5 and above, and Genie 4.
 
 ### Using the DLL with Genie:
 To install this Plugin, place the CharacterInventory.DLL in your Genie "Plugin" folder. When Genie launches, click "Ok" to authorize. 
