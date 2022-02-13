@@ -43,6 +43,8 @@ namespace Character_Inventory
         private static string _pluginPath;
         private static string _filePath;
 
+        private static string basePath = Application.StartupPath;
+
         //Temp variables for filepath save
         private static string _filePath_save;
 
@@ -114,6 +116,7 @@ namespace Character_Inventory
             _host = Host;
 
             //LoadXMLFile();
+            basePath = _host.get_Variable("PluginPath");
 
         }
 
@@ -128,16 +131,22 @@ namespace Character_Inventory
             if (ScanMode != null) // If a scan isn't in progress, do nothing here.
             {
                 string trimtext = Text.Trim(new char[] { '\n', '\r', ' ' }); // Trims spaces and newlines
+                
+                //Remove Everything after ":" in Items worn....
+                Match _itemsWorn = Regex.Match(trimtext, @"^[^:]+:");
+                string item_Location = _itemsWorn.ToString();
+                //_host.EchoText("Regex return value:" + item_Location);
+                
 
                 if (trimtext.StartsWith("XML") && trimtext.EndsWith("XML")) { } // Skip XML parser lines
 
                 else if (string.IsNullOrEmpty(trimtext)) { } // Skip blank lines
 
                 //Starting the scan from ParseInput, and see which slot trimtext is referring to in "Items worn..."
-                else if (helpMeFindIt.IfContains(trimtext) && ScanMode == "Start")
+                else if (helpMeFindIt.IfContains(item_Location) && ScanMode == "Start")
                 {
                     //Return a location for the type of item: Arms, Back, Legs, Ground, Back, Head, etc
-                    locationForItem = helpMeFindIt.Category(trimtext);
+                    locationForItem = helpMeFindIt.Category(item_Location);
 
                     //Test Message - confirm item found a category
                     //_host.SendText("#echo Current Location: " + locationForItem + " / trimtext: " + trimtext);
@@ -154,13 +163,14 @@ namespace Character_Inventory
 
                 else if (ScanMode == "Start_Inventory")
                 {
-                    if (helpMeFindIt.IfContains(trimtext))
+
+                    if (helpMeFindIt.IfContains(item_Location))
                     {
                         //Return a location (1 of 6) for the type of item: Arms, Back, Legs, Ground, Back, Head
-                        locationForItem = helpMeFindIt.Category(trimtext);
+                        locationForItem = helpMeFindIt.Category(item_Location);
 
                         //Test Message - confirm item found a category
-                        //_host.SendText("#echo Current Location: " + locationForItem + " / trimtext: " + trimtext);
+                        //_host.SendText("#echo Start Location - Current Location: " + locationForItem + " / trimtext: " + item_Location);
 
                         if (locationForItem == "NotFound")
                         {
@@ -206,7 +216,7 @@ namespace Character_Inventory
                     else
                     {
                         //Debug Text output to log 
-                        // _host.SendText("#echo >Log locationforItem: " + locationForItem + " / trimtext: " + trimtext);
+                         //_host.SendText("#echo >Log locationforItem: " + locationForItem + " / trimtext: " + trimtext);
 
                         //Add Item to WornItem Location
                         Add_Item_To_Location(locationForItem, trimtext);
@@ -657,40 +667,25 @@ namespace Character_Inventory
         {
             //Compiler Setting: Load for local debugging outside of Genie (DEBUG)
             //                  or for use in Genie (RELEASE)
-#if DEBUG
-            _pluginPath = Directory.GetCurrentDirectory();
-#else
-            _pluginPath = Plugin_Code._host.get_Variable("PluginPath");
-#endif
-
-            _filePath = _pluginPath + "\\Character_Inventory.xml";
+            string _configFile = Path.Combine(basePath, "Character_Inventory.xml");
+            //_host.EchoText(_configFile);
 
             //Load data from XML file containing character inventory data into Dataset
             XmlSerializer _serializer = new XmlSerializer(typeof(Character_List));
 
             //Create Empty XML Config File if it doesn't exist
-            if (!File.Exists(_filePath))
+            if (!File.Exists(_configFile))
             {
-#if DEBUG
-                //Compile as Stand-Alone Executable
-                _pluginPath = Directory.GetCurrentDirectory();
-#else
-                //Compile as DLL for Genie Plug-in
-                _pluginPath = Plugin_Code._host.get_Variable("PluginPath");
-#endif
-
-                //Default File Name
-                _filePath_save = _pluginPath + "\\Character_Inventory.xml";
-
-                //Location to write the new file too
-                using (TextWriter _filepath_toSave = new StreamWriter(_filePath_save))
+                using (TextWriter _filepath_toSave = new StreamWriter(_configFile))
                 {
-                    //Write the file to the filepath
+                //Write the file to the filepath
                     _serializer.Serialize(_filepath_toSave, _character_list_XML);
                 }
+
+
             }
 
-            using (FileStream stream = File.OpenRead(_filePath))
+            using (FileStream stream = File.OpenRead(_configFile))
             {
 
                 // Load XML file into Serializer
@@ -702,6 +697,9 @@ namespace Character_Inventory
         //Save Character List Settings to an XML File
         public static void SaveXMLFile()
         {
+
+            string _configFile = Path.Combine(basePath, "Character_Inventory.xml");
+
 #if DEBUG
             //Compile as Stand-Alone Executable
             _pluginPath = Directory.GetCurrentDirectory();
@@ -713,7 +711,7 @@ namespace Character_Inventory
             _filePath_save = _pluginPath + "\\Character_Inventory.xml";
 
             //Location to write the new file too
-            using (TextWriter _filepath_toSave = new StreamWriter(_filePath_save))
+            using (TextWriter _filepath_toSave = new StreamWriter(_configFile))
             {
                 //Serializer to handle conversion of Character_List class to XML
                 XmlSerializer _serializer = new XmlSerializer(typeof(Character_List));
@@ -1950,6 +1948,11 @@ namespace Character_Inventory
         public bool IfContains(string TextToLookFor)
         {
             bool foundIt = false;
+
+            if (TextToLookFor == null || TextToLookFor == "")
+            {
+                return false;
+            }
 
             foreach (string item in EverythingWorn)
             {
