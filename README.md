@@ -1,7 +1,9 @@
 # CharacterInventory
 GeniePlugin to Scan your Worn items and Containers in Dragonrealms.
 
-### V1.0 - Initial Release
+### V1.1 - Initial Release 
+-Updated Directory pathing to work with Genie 4 (using appdata directory)
+-Updated Scanning to be compatible with TT103 updates to "inventory slot full"
 
 ![Screenshot](/screenshot.jpg)
 
