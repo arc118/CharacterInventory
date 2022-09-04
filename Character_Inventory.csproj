@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8B7BE5BA-2037-4676-A95D-C56B712B8E77}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Character_Inventory</RootNamespace>
     <AssemblyName>CharacterInventory</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

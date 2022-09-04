@@ -8,6 +8,6 @@ C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\
 C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\Release\Character_Inventory.csproj.CopyComplete
 C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\Release\CharacterInventory.pdb
 C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\Release\Character_Inventory.csproj.AssemblyReference.cache
-C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\bin\Release\CharacterInventory.exe.config
-C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\bin\Release\CharacterInventory.exe
-C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\Release\CharacterInventory.exe
+C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\bin\Release\CharacterInventory.dll.config
+C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\bin\Release\CharacterInventory.dll
+C:\Users\David\Desktop\Genie Client 3 Program\opensource\CharacterInventory\obj\Release\CharacterInventory.dll

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8b7be5ba-2037-4676-a95d-c56b712b8e77": {
+      "ProjectGuid": "8b7be5ba-2037-4676-a95d-c56b712b8e77",
+      "DisplayName": "Character_Inventory",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

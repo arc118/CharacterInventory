@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Policy;
 using System.Windows.Forms;
+
 
 namespace Character_Inventory
 {
@@ -59,8 +55,27 @@ namespace Character_Inventory
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Unable to open the default browser.");
+                            //MessageBox.Show("Unable to open the default browser.");
+                        //}
+                        
+                            // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                            if (Environment.OSVersion.Version.Major >= 6)
+                            {
+
+                                url_string = url_string.Replace("&", "^&");
+                                url_string = url_string.Replace(" ", "%20");
+                                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", $"/k start {url_string}") { CreateNoWindow = true });
+                            }
+                            else
+                            {
+                              MessageBox.Show("Unable to open the default browser. If running in Linux or OSX, this is not currently compatible.");
+                            }
                         }
+                        
+
+
+
+
 
                     }
 
